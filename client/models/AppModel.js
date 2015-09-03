@@ -20,7 +20,26 @@ var AppModel = Backbone.Model.extend({
     // event listener for enqueue
     params.library.on('enqueue', function(song){  //appmodel['songQueue'] = instance1 --> appmodel['songQueue'] = instance1['collectionchanged']
       this.get('songQueue').add(song);
+      if (this.get('songQueue').length === 1) {
+        song.play();
+      }
       //console.log(this.get('songQueue'));
     }, this);
+
+    //event listener for dequeue
+    params.library.on('dequeue', function(song){
+      this.get('songQueue').remove(song);
+    }, this);
+
+    //event listener for when song finishes playing
+    params.library.on('ended', function(song){
+      //remove from queue
+      this.get('songQueue').remove(song);
+      // play next song
+      if (this.get('songQueue').length > 0) {
+        this.get('songQueue').at(0).play();
+      }
+    }, this);
+
   }
 });

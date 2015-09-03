@@ -12,9 +12,13 @@ var AppView = Backbone.View.extend({
       this.playerView.setSong(model.get('currentSong'));
     }, this);
 
-    //change event isn't fired for model add to collection, 
+    //change event isn't fired for model add to collection,
     //guess that bind is needed to trap the add event
     this.model.get('songQueue').bind('add', function(model){
+      this.songQueueView.render();
+    }, this);
+
+    this.model.get('songQueue').bind('remove', function(model){
       this.songQueueView.render();
     }, this);
   },
