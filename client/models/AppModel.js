@@ -28,11 +28,6 @@ var AppModel = Backbone.Model.extend({
     //event listener for dequeue
     params.library.on('dequeue', function(song){
       this.get('songQueue').remove(song);
-      // if there are no songs in the queue
-      if (this.get('songQueue').length === 0) {
-        //stop audio
-        $('audio').trigger('pause');
-      }
     }, this);
 
     //event listener for when song finishes playing
