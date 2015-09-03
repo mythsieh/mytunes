@@ -5,10 +5,8 @@ var SongQueueEntryView = Backbone.View.extend({
 
   template: _.template('<td>(<%= artist %>)</td><td><%= title %></td>'),
 
-  // these are the intents we say
   events: {
     'click': function() {
-      //remove operation
       this.model.dequeue();
     }
   },
@@ -18,5 +16,3 @@ var SongQueueEntryView = Backbone.View.extend({
   }
 
 });
-
-
